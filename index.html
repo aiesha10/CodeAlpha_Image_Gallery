@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+  <!-- Import Google Fonts -->
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Image Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Parisienne&display=swap" rel="stylesheet">
+  <style>
+
+    
+    /* CSS General page style */
+    body {
+      font-family: Arial ; /* body text */
+      margin: 0; /* to remove outer spacing/ space */
+      padding: 20px; /* adds space b/w the content and edges */
+      background: #FFF0F1;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px; /* spacing between images */
+    }
+    .gallery-item {
+        display: inline-block;
+        width:100%;
+        margin-bottom: 15px;
+        break-inside: avoid;
+        transition: transform 0.3s, filter 0.3s;
+    }
+    .gallery-item img {
+        width: 100%;
+        height:auto;
+        border-radius: 10px; 
+        display: block;
+    }
+    h1, h2 {
+      font-family: 'Parisienne', serif;  /* heading text */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Filter buttons like a menu */
+    nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #F4C2C2;
+      color: #FFF0F1;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    nav button:hover {
+      background: #F4C2C2;
+    }
+
+    /* Gallery grid */
+    main {
+      /*display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px; /* adds space like margin but inside the grid */
+    /* Made that tomake it look more pinteresty */
+    column-count: 3;
+    column-gap: 15px;
+    }
+    main img {
+      width: 100%;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      /*height: 250px;
+      object-fit: cover;
+      border-radius: 10px; /* round corners */
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    /* when you put mouse over picture it darkes and image pops a little */
+    main img:hover {
+      transform: scale(1.05);
+      filter: brightness(85%);
+    }
+
+    /* Lightbox (popup) */
+    aside.lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000; /* appears on top of everything else */
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #FFF0F1;
+      justify-content: center;
+      align-items: center;
+    }
+    aside.lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #F4C2C2;
+    }
+    aside.lightbox .close,
+    aside.lightbox .prev,
+    aside.lightbox .next {
+      position: absolute; /* float on top of popup */
+      top: 50%;
+      font-size: 2em;
+      color: rgba(0,0,0,0.8);
+      cursor: pointer;
+      padding: 10px;
+      transform: translateY(-50%); /* Centers them vertically. */
+      user-select: none;
+    }
+    aside.lightbox .close {
+      top: 10%;
+      right: 5%;
+      font-size: 2.5em;
+    }
+    aside.lightbox .prev { left: 5%; }
+    aside.lightbox .next { right: 5%; }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: lightpink;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page header -->
+  <header>
+    <h1>Image Gallery</h1>
+  </header>
+
+  <!-- Filter buttons -->
+  <nav>
+    <button onclick="filterSelection('all')">All</button>
+    <button onclick="filterSelection('outfits')">Outfits</button>
+    <button onclick="filterSelection('home')">Home</button>
+    <button onclick="filterSelection('animals')">Animals</button>
+  </nav>
+
+  <!-- Gallery images -->
+  <main>
+    <div class="gallery">
+    </div class="gallery-item">
+    <img src="https://i.pinimg.com/1200x/9b/1d/68/9b1d68cf0d693092ca7c7713747e7c51.jpg" alt="Outfits" class="outfits">
+    </div>
+    <div class -"gallery-item">
+    <img src ="https://i.pinimg.com/736x/9c/98/2e/9c982ef33459a6aea2b633ed8d06bf88.jpg" alt = "Outfits" class ="outfits">
+    </div>
+    <div class = "gallery-item">
+    <img src="https://i.pinimg.com/736x/29/41/b0/2941b0a266c0fc1cb388429315b9ccf9.jpg" alt="Animals" class="animals">
+    </div>
+    <div class="gallery-item">
+    <img src="https://i.pinimg.com/736x/77/49/7b/77497bfc6b3cf371ad4a6272dfea25df.jpg" alt="Home" class="home">
+    </div>
+    <div class="gallery-item">
+    <img src="https://i.pinimg.com/1200x/59/6c/0c/596c0c5ed3915827f883ca7d4ae4b680.jpg" alt="Animals" class="animals">
+    </div>
+    <div class="gallery-item">
+    <img src="https://i.pinimg.com/736x/9e/a4/04/9ea40436b49167d8af39029b968e51db.jpg" alt="Outfits" class="outfits">
+    </div>
+    <div class = "gallery-item">
+    <img src="https://i.pinimg.com/1200x/1f/93/a4/1f93a45d4342cea78ae88f51363577cc.jpg" alt="Home" class="home">
+   </div>
+  </div>
+</main>
+
+  <!-- Lightbox popup -->
+    <!-- aside shows extra content  -->
+  <aside class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </aside>
+
+  <!-- Page footer -->
+  <footer>
+    <p>&copy; 2025 Pinteresty Fairycore Gallery</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+   // lighbox adds big black popup box and lightboximg shows the actual img in popup 
+    let currentIndex = 0;
+    const images = document.querySelectorAll('main img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    // Open lightbox when image clicked
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index; // save which photo number i clicked 
+        showImage();
+        lightbox.style.display = 'flex'; // open pop up box
+      });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    // Change image
+    // -1 for prev and +1 for next
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      showImage();
+    }
+
+    // Show the selected image
+    function showImage() {
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    // Filter images
+    function filterSelection(category) {
+      const items = document.getElementsByClassName("gallery-item");
+      for(let i = 0; i< itmes.length; i++) {
+        if (category == "all" || items[i].classList.contains(category)) {
+            items[i].style.display = "inline-block";
+        } else {
+            items[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
