@@ -1,0 +1,141 @@
+/* base */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Cinzel Decorative', cursive;
+  background: #FFF0F1;
+  color: pink;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* header */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-family: 'Parisienne', cursive;
+  font-weight: 700;
+}
+
+/* filters */
+.filters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+  padding: 0 16px;
+}
+.filters button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #F4C2C2;
+  color: white;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+.filters button:hover { transform: translateY(-2px); filter: brightness(.97); }
+.filters button.is-active { outline: 2px solid whitesmoke; }
+
+/* gallery grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 0 16px 32px;
+}
+.item {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  break-inside: avoid; /* important for masonry look */
+}
+.item:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,.12); }
+
+.gallery-item figcaption {
+  font-family: 'Parisienne', cursive;
+  font-size: 1.2rem;
+  color: #555;
+}
+.item img {
+  display: block;
+  width: 100%;
+  height: auto; /* let images keep natural aspect */
+  object-fit: cover;
+  transition: transform .35s ease, filter .35s ease;
+  cursor: pointer; /* hand cursor on hover */
+}
+.gallery-item img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+.item:hover img { transform: scale(1.04); filter: brightness(.93); }
+
+.item.is-hidden { display: none; }
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: #FFF0F1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 2000;
+}
+.lightbox.open { display: flex; }
+.lightbox .lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 0 30px pink;
+}
+
+/* lightbox controls */
+.lightbox .close,
+.lightbox .prev,
+.lightbox .next {
+  position: absolute;
+  border: 0;
+  background: rgba(255,255,255,.08);
+  color: black;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  backdrop-filter: blur(2px);
+}
+.lightbox .close { top: 18px; right: 24px; font-size: 2rem; }
+.lightbox .prev  { left: 18px; top: 50%; transform: translateY(-50%); }
+.lightbox .next  { right: 18px; top: 50%; transform: translateY(-50%); }
+
+
+@media (max-width:480px){
+  .item img { height: auto; }
+  .lightbox .prev, .lightbox .next { font-size: 1.2rem; padding: 8px 10px; }
+}
+
+/* this part for Pinterest Style */
+.gallery {
+  column-count: 3;         /* number of columns */
+  column-gap: 1.2rem;      /* space between columns */
+}
+.item {
+  display: inline-block;   /* allow flowing into columns */
+  width: 100%;
+  margin-bottom: 1.2rem;   /* vertical spacing */
+}
+
+/* to make it responsive */
+@media (max-width: 900px) {
+  .gallery { column-count: 2; }
+}
+@media (max-width: 600px) {
+  .gallery { column-count: 1; }
+}
